@@ -1,0 +1,142 @@
+{
+  "id": null,
+  "uid": "slm-monitoring",
+  "title": "SLM Inference and Quality Monitoring",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Request Latency p50 / p95 / p99",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 9, "w": 12, "x": 0, "y": 0
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum by (le) (rate(slm_request_latency_seconds_bucket[5m])))",
+          "legendFormat": "p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(slm_request_latency_seconds_bucket[5m])))",
+          "legendFormat": "p95"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum by (le) (rate(slm_request_latency_seconds_bucket[5m])))",
+          "legendFormat": "p99"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "TTFT p95",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 9, "w": 12, "x": 12, "y": 0
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(slm_ttft_seconds_bucket[5m])))",
+          "legendFormat": "TTFT p95"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "TPOT p95",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8, "w": 12, "x": 0, "y": 9
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(slm_tpot_seconds_bucket[5m])))",
+          "legendFormat": "TPOT p95"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Prompt Tokens per Second",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8, "w": 12, "x": 12, "y": 9
+      },
+      "targets": [
+        {
+          "expr": "slm_prompt_tokens_per_second",
+          "legendFormat": "Prompt TPS"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Completion Tokens per Second",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8, "w": 12, "x": 0, "y": 17
+      },
+      "targets": [
+        {
+          "expr": "slm_completion_tokens_per_second",
+          "legendFormat": "Completion TPS"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Model Evaluation Pass Rate",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8, "w": 12, "x": 12, "y": 17
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "slm_eval_pass_rate",
+          "legendFormat": "Pass Rate"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Active Requests",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8, "w": 12, "x": 0, "y": 25
+      },
+      "targets": [
+        {
+          "expr": "slm_active_requests",
+          "legendFormat": "Active"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Failed Golden Tests",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8, "w": 12, "x": 12, "y": 25
+      },
+      "targets": [
+        {
+          "expr": "slm_eval_failed_tests",
+          "legendFormat": "Failed Tests"
+        }
+      ]
+    }
+  ]
+}

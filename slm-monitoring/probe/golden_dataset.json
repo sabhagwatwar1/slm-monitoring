@@ -1,0 +1,34 @@
+
+[
+  {
+    "id": "test_001",
+    "question": "What is Kubernetes?",
+    "expected_contains": [
+      "container",
+      "orchestration"
+    ]
+  },
+  {
+    "id": "test_002",
+    "question": "What is Docker?",
+    "expected_contains": [
+      "container",
+      "platform"
+    ]
+  },
+  {
+    "id": "test_003",
+    "question": "What is AWS S3?",
+    "expected_contains": [
+      "object storage"
+    ]
+  },
+  {
+    "id": "test_004",
+    "question": "What is Prometheus?",
+    "expected_contains": [
+      "monitoring",
+      "metrics"
+    ]
+  }
+]
